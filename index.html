@@ -53,11 +53,11 @@
           <form id="student-form" class="modal__form">
             <fieldset>
               <label for="nome">Nome</label>
-              <input type="text" placeholder="Nome do aluno..." name="nome" id="nome">
+              <input type="text" placeholder="Nome do aluno..." name="nome" id="nome" required>
               <label>Matrícula</label>
-              <input type="text" placeholder="Matrícula" id="matricula" name="matricula">
+              <input type="text" placeholder="Matrícula" id="matricula" name="matricula" required>
               <label>Curso</label>
-              <select name="curso" id="curso">
+              <select name="curso" id="curso" required>
                 <option value="">selecione</option>
                 <option value="Sistemas para internet">Sistemas para internet</option>
                 <option value="Redes">Redes</option>
@@ -91,19 +91,19 @@
           <form id="discipline-form" class="modal__form">
             <fieldset>
               <label for="discipline-name">Nome da disciplina</label>
-              <input type="text" placeholder="Digite o nome da Disciplina" name="nome" id="nome">
+              <input type="text" placeholder="Digite o nome da Disciplina" name="nome" id="nome" required>
               <label for="discipline-hours">Carga Horária</label>
-              <input type="text" placeholder="Digite a Carga Horária" id="cargaHoraria" name="cargaHoraria">
+              <input type="text" placeholder="Digite a Carga Horária" id="cargaHoraria" name="cargaHoraria" required>
               <label for="discipline-professor">Professor</label>
-              <input type="text" placeholder="Digite o nome do Professor" id="professor" name="professor">
+              <input type="text" placeholder="Digite o nome do Professor" id="professor" name="professor" required>
               <label for="discipline-status">Status</label>
-              <select name="status" id="status">
+              <select name="status" id="status" required>
                 <option value="">Selecione o status</option>
                 <option value="Obrigatória">Obrigatória</option>
                 <option value="Opcional">Opcional</option>
               </select>
               <label for="discipline-notes">Observações</label>
-              <textarea rows="10" cols="80" placeholder="Digite observações sobre a disciplina" id="observacoes" name="observacoes"></textarea>
+              <textarea rows="10" cols="80" placeholder="Digite observações sobre a disciplina" id="observacoes" name="observacoes" required></textarea>
             </fieldset>
             <div class="modal__form-buttons">
               <button class="button button--danger" type="reset" onclick="closeDisciplineModal()">

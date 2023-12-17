@@ -11,11 +11,18 @@
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .subject-card__actions {
-  position: relative;
-  left: 130px;
+  align-self: flex-end;
+}
+
+.subject-card hr {
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid black;
 }
 
 @media screen and (min-width: 768px)  { 

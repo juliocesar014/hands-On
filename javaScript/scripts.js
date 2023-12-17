@@ -42,13 +42,21 @@ const createStudentTableRow = (id, name, matricula, curso) => {
 const saveStundentData = (url, method) => {
   studentForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    // capturar os dados do formulário
     const formData = new FormData(studentForm);
-    // transformar os dados do formulário em um objeto
-    const payload = new URLSearchParams(formData);
+
+    if (Array.from(formData.values()).some((value) => value.trim() === "")) {
+      alert("Preencha todos os campos corretamente.");
+      return;
+    }
+
+    const payload = {};
+    formData.forEach((value, key) => {
+      payload[key] = value.trim();
+    });
+
     fetch(url, {
       method: method,
-      body: payload,
+      body: new URLSearchParams(payload),
     }).catch((error) => {
       closeStudentModal();
       alert("Ocorreu um erro. Tente mais tarde.");
@@ -167,7 +175,6 @@ const createDisciplineTableRow = (
       <li>Observações: ${observacoes}</li>
     </ul>
     
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     
     <div class="subject-card__actions">
       <button class="button button--danger" onclick="deleteDisciplineTable(${id})">Apagar</button>
@@ -183,19 +190,24 @@ const saveDisciplineData = (url, method) => {
   disciplineForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(disciplineForm);
-    const payload = new URLSearchParams(formData);
+    if (Array.from(formData.values()).some((value) => value.trim() === "")) {
+      alert("Preencha todos os campos corretamente.");
+      return;
+    }
+
+    const payload = {};
+    formData.forEach((value, key) => {
+      payload[key] = value.trim();
+    });
+
     fetch(url, {
       method: method,
-      body: payload,
-    })
-      .then(() => {
-        closeDisciplineModal();
-      })
-      .catch((error) => {
-        closeDisciplineModal();
-        alert("Ocorreu um erro. Tente mais tarde.");
-        console.error(error);
-      });
+      body: new URLSearchParams(payload),
+    }).catch((error) => {
+      closeStudentModal();
+      alert("Ocorreu um erro. Tente mais tarde.");
+      console.error(error);
+    });
   });
 };
 
