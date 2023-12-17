@@ -13,6 +13,11 @@
   margin-bottom: 20px;
 }
 
+.subject-card__actions {
+  position: relative;
+  left: 130px;
+}
+
 @media screen and (min-width: 768px)  { 
   .subject-list {
     flex-direction: row;

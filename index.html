@@ -43,17 +43,6 @@
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- <tr>
-              <td>Patrícia Marcela Sara Novaesww</td>
-              <td>0031</td>
-              <td>Sistemas para internet</td>
-              <td align="center">
-                <button class="button button--danger" onclick="deleteStudentTable(3)">Apagar</button>
-                <button class="button button--success" onclick="editdStudentModal(3)">Editar</button>
-              </td>
-            </tr> -->
-          </tbody>
         </table>
       </div>
       <dialog class="modal" id="student-modal">
@@ -84,45 +73,54 @@
         </div>
       </dialog>
     </section>
+
     <section class="section-wrapper">
       <header class="section-header">
         <h1 class="section-header__title">Disciplina</h1>
+        <button class="button button--success" onclick="createDiscipline()">Nova Disciplina</button>
       </header>
       <div class="subject-list">
-        <div class="subject-card">
-          <h3 class="subject-card__title">Nome da disciplina</h3>
-          <hr />
-          <ul class="subject-card__list">
-            <li>carga horária: 16h</li>
-            <li>Professor: Pessoa da Silva</li>
-            <li>Status <span class="tag tag--danger">Obrigatória</span></li>
-          </ul>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
-
-        <div class="subject-card">
-          <h3 class="subject-card__title">Nome da disciplina</h3>
-          <hr />
-          <ul class="subject-card__list">
-            <li>carga horária: 16h</li>
-            <li>Professor: Pessoa da Silva</li>
-            <li>Status <span class="tag tag--success">Opcional</span></li>
-          </ul>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-        </div>
-
-        <div class="subject-card">
-          <h3 class="subject-card__title">Nome da disciplina</h3>
-          <hr />
-          <ul class="subject-card__list">
-            <li>carga horária: 16h</li>
-            <li>Professor: Pessoa da Silva</li>
-            <li>Status <span class="tag tag--success">Opcional</span></li>
-          </ul>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
       </div>
+
+
+      <dialog class="modal" id="discipline-modal">
+        <div class="modal__container">
+          <header class="modal__header">
+            <h3 id="discipline-modal-title">Nova disciplina</h3>
+          </header>
+          <form id="discipline-form" class="modal__form">
+            <fieldset>
+              <label for="discipline-name">Nome da disciplina</label>
+              <input type="text" placeholder="Digite o nome da Disciplina" name="nome" id="nome">
+              <label for="discipline-hours">Carga Horária</label>
+              <input type="text" placeholder="Digite a Carga Horária" id="cargaHoraria" name="cargaHoraria">
+              <label for="discipline-professor">Professor</label>
+              <input type="text" placeholder="Digite o nome do Professor" id="professor" name="professor">
+              <label for="discipline-status">Status</label>
+              <select name="status" id="status">
+                <option value="">Selecione o status</option>
+                <option value="Obrigatória">Obrigatória</option>
+                <option value="Opcional">Opcional</option>
+              </select>
+              <label for="discipline-notes">Observações</label>
+              <textarea rows="10" cols="80" placeholder="Digite observações sobre a disciplina" id="observacoes" name="observacoes"></textarea>
+            </fieldset>
+            <div class="modal__form-buttons">
+              <button class="button button--danger" type="reset" onclick="closeDisciplineModal()">
+                Cancelar
+              </button>
+              <button class="button button--success" type="submit" id="save-discipline">Criar</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      
+      
+
+
+
     </section>
+
   </main>
   <footer class="footer">
     <span>Lorem, ipsum dolor sit tenetur voluptatem quod!</span>

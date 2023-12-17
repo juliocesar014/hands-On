@@ -128,3 +128,125 @@ const loadStudentTable2 = () => {
 };
 
 loadStudentTable();
+
+const disciplineModal = document.querySelector("#discipline-modal");
+const disciplineTable = document.querySelector("#discipline-table");
+const disciplineForm = document.querySelector("#discipline-form");
+const disciplineModalTitle = document.querySelector("#discipline-modal-title");
+const saveDisciplineButton = document.querySelector("#save-discipline");
+
+const openDisciplineModal = () => disciplineModal.showModal();
+const createDiscipline = () => {
+  disciplineModalTitle.innerHTML = `Nova Disciplina`;
+  saveDisciplineButton.innerHTML = "Criar";
+  openDisciplineModal();
+  saveDisciplineData(`${baseUrl}/disciplinas`, "POST");
+};
+
+const closeDisciplineModal = () => disciplineModal.close();
+
+const createDisciplineTableRow = (
+  id,
+  nome,
+  cargaHoraria,
+  professor,
+  status,
+  observacoes
+) => {
+  const tableTr = document.createElement("div");
+  tableTr.classList.add("subject-card");
+  tableTr.innerHTML = `
+    <h3 class="subject-card__title">${nome}</h3>
+    <hr />
+    <ul class="subject-card__list">
+      <li>carga horária: ${cargaHoraria}</li>
+      <li>Professor: ${professor}</li>
+      <li>Status <span class="tag ${
+        status === "Obrigatória" ? "tag--danger" : "tag--success"
+      }">${status}</span></li>
+      <li>Observações: ${observacoes}</li>
+    </ul>
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    
+    <div class="subject-card__actions">
+      <button class="button button--danger" onclick="deleteDisciplineTable(${id})">Apagar</button>
+      <button class="button button--success" onclick="editedDisciplineModal(${id})"}>Editar</button>    
+    </div>
+
+    `;
+
+  document.querySelector(".subject-list").appendChild(tableTr);
+};
+
+const saveDisciplineData = (url, method) => {
+  disciplineForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(disciplineForm);
+    const payload = new URLSearchParams(formData);
+    fetch(url, {
+      method: method,
+      body: payload,
+    })
+      .then(() => {
+        closeDisciplineModal();
+      })
+      .catch((error) => {
+        closeDisciplineModal();
+        alert("Ocorreu um erro. Tente mais tarde.");
+        console.error(error);
+      });
+  });
+};
+
+const loadDisciplineTable = async () => {
+  try {
+    const response = await fetch(`${baseUrl}/disciplinas`);
+    const data = await response.json();
+    data.forEach((discipline) => {
+      createDisciplineTableRow(
+        discipline.id,
+        discipline.nome,
+        discipline.cargaHoraria,
+        discipline.professor,
+        discipline.status,
+        discipline.observacoes
+      );
+    });
+  } catch (error) {
+    alert("Ocorreu um erro. Tente mais tarde.");
+    console.error(error);
+  }
+};
+
+const deleteDisciplineTable = (id) => {
+  fetch(`${baseUrl}/disciplinas/${id}`, {
+    method: "DELETE",
+  }).catch((error) => {
+    alert("Ocorreu um erro. Tente mais tarde.");
+    console.error(error);
+  });
+};
+
+const editedDisciplineModal = (id) => {
+  fetch(`${baseUrl}/disciplinas/${id}`)
+    .then((resp) => resp.json())
+    .then((data) => {
+      const { nome, cargaHoraria, professor, status, observacoes } = data;
+      disciplineModalTitle.innerHTML = `Editar Disciplina ${nome}`;
+      document.querySelector("#nome").value = nome;
+      document.querySelector("#cargaHoraria").value = cargaHoraria;
+      document.querySelector("#professor").value = professor;
+      document.querySelector("#status").value = status;
+      document.querySelector("#observacoes").value = observacoes;
+      saveDisciplineButton.innerHTML = "Salvar";
+      openDisciplineModal();
+      saveDisciplineData(`${baseUrl}/disciplinas/${id}`, "PUT");
+    })
+    .catch((error) => {
+      alert("Ocorreu um erro. Tente mais tarde.");
+      console.error(error);
+    });
+};
+
+loadDisciplineTable();
